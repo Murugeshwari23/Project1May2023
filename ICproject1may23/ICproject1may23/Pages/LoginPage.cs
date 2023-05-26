@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ICproject1may23.Utilities;
 using OpenQA.Selenium;
 
 namespace ICproject1may23.Pages
@@ -15,6 +16,7 @@ namespace ICproject1may23.Pages
         driver.Navigate().GoToUrl("http://horse.industryconnect.io/Account/Login?ReturnUrl=%2f");
         driver.Manage().Window.Maximize();
 
+         //WaitTime.WaitToExist(driver, "Id", "UserName", 4);
         // enter valid username in the username field
         IWebElement usernamefield = driver.FindElement(By.Id("UserName"));
         usernamefield.SendKeys("hari");

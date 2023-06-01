@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ICproject1may23.Utilities;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 
 namespace ICproject1may23.Pages
 {
@@ -15,10 +16,11 @@ namespace ICproject1may23.Pages
          //launch the turnup portal
         driver.Navigate().GoToUrl("http://horse.industryconnect.io/Account/Login?ReturnUrl=%2f");
         driver.Manage().Window.Maximize();
+            Thread.Sleep(4000);
 
-         //WaitTime.WaitToExist(driver, "Id", "UserName", 4);
-        // enter valid username in the username field
-        IWebElement usernamefield = driver.FindElement(By.Id("UserName"));
+            //WaitTime.WaitToExist(driver, "Id", "UserName", 4);
+            // enter valid username in the username field
+            IWebElement usernamefield = driver.FindElement(By.Id("UserName"));
         usernamefield.SendKeys("hari");
 
         // enter valid password in the password field

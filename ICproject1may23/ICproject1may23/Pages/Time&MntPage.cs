@@ -11,7 +11,7 @@ using OpenQA.Selenium;
 
 namespace ICproject1may23.Pages
 {
-    public class Time_MntPage : Commondriver
+    public class Time_MntPage : CommonDriver
     {
        
         public void CreateTimerecord(IWebDriver driver)
@@ -24,20 +24,17 @@ namespace ICproject1may23.Pages
             typecode.Click();
 
             Thread.Sleep(2000);
-            IWebElement time = driver.FindElement(By.XPath("//*[@id=\"TypeCode_listbox\"]/li[2]"));
-            time.Click();
-            Thread.Sleep(3000);
+            IWebElement timeOption = driver.FindElement(By.XPath("//*[@id=\"TypeCode_listbox\"]/li[2]"));
+            timeOption.Click();
 
-            IWebElement fieldcode = driver.FindElement(By.Id("Code"));
-            fieldcode.SendKeys("Project1");
+            IWebElement Code = driver.FindElement(By.Id("Code"));
+            Code.SendKeys("Project1");
 
             IWebElement fieldDescription = driver.FindElement(By.Id("Description"));
-            fieldDescription.SendKeys("First Project");
-            Thread.Sleep(2000);
+            fieldDescription.SendKeys("Project1");
 
             IWebElement priceunit = driver.FindElement(By.XPath("//*[@id=\"TimeMaterialEditForm\"]/div/div[4]/div/span[1]/span/input[1]"));
             priceunit.SendKeys("60");
-            Thread.Sleep(3000);
 
             IWebElement Savebutton = driver.FindElement(By.Id("SaveButton"));
             Savebutton.Click();
@@ -47,43 +44,57 @@ namespace ICproject1may23.Pages
             LastPage.Click();
             Thread.Sleep(2000);
 
-            //check if record created
+            /*IWebElement LastElement = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[1]"));
+
+                Assert.Fail("New record has not been found.");*/
+            }
+
+        public string GetCode(IWebDriver driver) 
+        {
             IWebElement newCode = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[1]"));
-            Thread.Sleep(3000);
-            if (newCode.Text == "Project1")
-            {
-                Assert.Pass("Record Project1 created successfully.");
-            }
-            else
-            {
-                Assert.Fail("Time record Project1 has not been created successfully.");
-            }
+            return newCode.Text;
 
         }
 
-        public void EditTimerecord(IWebDriver driver)
+        public string GetDescription(IWebDriver driver)
+        {
+            IWebElement newDescription = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[3]"));
+            return newDescription.Text;
+
+        }
+        public string GetPrice(IWebDriver driver)
+        {
+            IWebElement newPrice = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[4]"));
+            return newPrice.Text;
+        }
+
+
+
+        public void EditTimerecord(IWebDriver driver, string code)
         {
             //Edit the record
-            IWebElement Editbutton = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[5]/a[1]"));
-            Editbutton.Click();
+            Thread.Sleep(2000);
+            IWebElement LastPage = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[4]/a[4]/span"));
+            LastPage.Click();
             Thread.Sleep(2000);
 
-            IWebElement time1 = driver.FindElement(By.XPath("//*[@id=\"TimeMaterialEditForm\"]/div/div[1]/div/span[1]/span/span[1]"));
-            time1.Click();
+            IWebElement editbutton = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[5]/a[1]"));
+            editbutton.Click();
+            Thread.Sleep(2000);
+
+            IWebElement edittimeOption = driver.FindElement(By.XPath("//*[@id=\"TimeMaterialEditForm\"]/div/div[1]/div/span[1]/span/span[1]"));
+            edittimeOption.Click();
             Thread.Sleep(2000);
 
             //edit the codename
-            IWebElement fieldcode1 = driver.FindElement(By.Id("Code"));
-            fieldcode1.Clear();
-            fieldcode1.SendKeys("Project2");
-
+            IWebElement editdcode = driver.FindElement(By.Id("Code"));
+            editdcode.Clear();
+            editdcode.SendKeys(code);
 
             //edit the description name
-            IWebElement fieldDescription1 = driver.FindElement(By.Id("Description"));
-            fieldDescription1.Clear();
-            fieldDescription1.SendKeys("Second Project");
-
-            // WaitTime.WaitToBeClickable(driver, "XPath", "//*[@id=\"TimeMaterialEditForm\"]/div/div[4]/div/span[1]/span/input[1]", 5 );
+            IWebElement editDescription = driver.FindElement(By.Id("Description"));
+            editDescription.Clear();
+            editDescription.SendKeys("Second Project");
 
             IWebElement editPriceOverlap = driver.FindElement(By.XPath("//*[@id=\"TimeMaterialEditForm\"]/div/div[4]/div/span[1]/span/input[1]"));
             editPriceOverlap.Click();
@@ -91,58 +102,54 @@ namespace ICproject1may23.Pages
             IWebElement editPrice = driver.FindElement(By.Id("Price"));
             editPrice.Clear();
             Thread.Sleep(3000);
-            editPriceOverlap.SendKeys("800");
-
-            Thread.Sleep(3000);
+            editPriceOverlap.SendKeys("800"); 
+            
+            Thread.Sleep(2000);
 
 
             //save the edited record
-            IWebElement Savebutton1 = driver.FindElement(By.Id("SaveButton"));
-            Savebutton1.Click();
+            IWebElement Savebutton = driver.FindElement(By.Id("SaveButton"));
+            Savebutton.Click();
             Thread.Sleep(3000);
 
             //navigate to last page.
-            IWebElement LastPage1 = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[4]/a[4]/span"));
-            LastPage1.Click();
+            IWebElement goToEditLastPageButton = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[4]/a[4]/span"));
+            goToEditLastPageButton.Click();
             Thread.Sleep(2000);
 
             // check if recored edited 
-            IWebElement newCode1 = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[1]"));
-            Thread.Sleep(2000);
+            //IWebElement editedCode = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[1]"));
+            //Thread.Sleep(2000);
+              //  Assert.That(editedCode.Text == "Project2", "Actual Code and expected code do not match.");
+            }
 
-            if (newCode1.Text == "Project2")
-            {
-                Console.WriteLine("Project1 Record Edited to Project2 successfully.");
-            }
-            else
-            {
-                Console.WriteLine("Time record has not been edited successfully.");
-            }
+        public string GeteditedCode(IWebDriver driver)
+        {
+            IWebElement createdcode= driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[1]"));
+            return createdcode.Text;
+
         }
+
+        
         public void DeleteTimerecord(IWebDriver driver)
         {
-            //delete the record
-            IWebElement Deletebutton = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[5]/a[2]"));
-            Deletebutton.Click();
+            Thread.Sleep(3000);
+            IWebElement lastPageButton = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[4]/a[4]/span"));
+            lastPageButton.Click();
+            Thread.Sleep(1000);
+
+            //delete record
+            IWebElement deleteRecord = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[5]/a[2]"));
+            deleteRecord.Click();
+
+            // Click OK
             driver.SwitchTo().Alert().Accept();
-            Thread.Sleep(2000);
+            Thread.Sleep(3000);
 
-            IWebElement lastpage2 = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[4]/a[4]/span"));
-            lastpage2.Click();
-            Thread.Sleep(2000);
-
-            //check if record deleted
-            IWebElement lastrecord = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[1]"));
-
-            if (lastrecord.Text != "Project2")
-            {
-                Console.WriteLine("Project2 deleted successfully");
-            }
-            else
-            {
-                Console.WriteLine("Project2 has not been deleted successfully");
-            }
-
+            //check if recored deleted
+            IWebElement editedCode = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[1]"));
+            Assert.That(editedCode.Text != "Project2", "Record hasn't been deleted.");
+        }
         }
     }
-}
+

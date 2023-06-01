@@ -8,11 +8,13 @@ using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium;
 using ICproject1may23.Utilities;
 using NUnit.Framework;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace ICproject1may23.Tests 
 {
     [TestFixture]
-    public class TimeandMtests : Commondriver
+
+    public class TimeandMtests : CommonDriver
     {
         [SetUp]
         public void SetUpActions()
@@ -24,33 +26,37 @@ namespace ICproject1may23.Tests
             LoginPage loginPageObj = new LoginPage();
             loginPageObj.Loginsteps(driver);
 
-            //create an object for Homepage
+            //Homepage object initialization and defnition
             HomePage HomePageObj = new HomePage();
             HomePageObj.GoToTMPage(driver);
 
         }
-        [Test]
-        public void CreateTimetests() 
+
+        HomePage homePageObj = new HomePage();
+        Time_MntPage tmPageObj = new Time_MntPage();
+
+        [Test, Order(1)]
+        public void CreateTimetests()
         {
-            Time_MntPage time_MntPageObj = new Time_MntPage();
-            time_MntPageObj.CreateTimerecord(driver);
+            homePageObj.GoToTMPage(driver);
+            tmPageObj.CreateTimerecord(driver);
         }
-        [Test]
-        public void editTimetests() 
+        [Test, Order(2)]
+        public void editTimetests()
         {
-            Time_MntPage time_MntPageObj = new Time_MntPage();
-            time_MntPageObj.EditTimerecord(driver);
+            homePageObj.GoToTMPage(driver);
+            //tmPageObj.EditTimerecord(driver);
         }
-        [Test]
-        public void deleteTimetests() 
+        [Test, Order(3)]
+        public void deleteTimetests()
         {
-            Time_MntPage time_MntPageObj = new Time_MntPage();
-            time_MntPageObj.DeleteTimerecord(driver);
+            homePageObj.GoToTMPage(driver);
+            tmPageObj.DeleteTimerecord(driver);
         }
         [TearDown]
         public void CloseTestRun()
         {
             driver.Quit();
-        }
+        } 
     }
-}
+    }

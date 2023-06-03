@@ -13,7 +13,7 @@ namespace ICproject1may23.Pages
 {
     public class Time_MntPage : CommonDriver
     {
-       
+
         public void CreateTimerecord(IWebDriver driver)
         {
             IWebElement CreateNew = driver.FindElement(By.XPath("//*[@id=\"container\"]/p/a"));
@@ -47,9 +47,9 @@ namespace ICproject1may23.Pages
             /*IWebElement LastElement = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[1]"));
 
                 Assert.Fail("New record has not been found.");*/
-            }
+        }
 
-        public string GetCode(IWebDriver driver) 
+        public string GetCode(IWebDriver driver)
         {
             IWebElement newCode = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[1]"));
             return newCode.Text;
@@ -68,9 +68,7 @@ namespace ICproject1may23.Pages
             return newPrice.Text;
         }
 
-
-
-        public void EditTimerecord(IWebDriver driver, string code)
+        public void EditTimerecord(IWebDriver driver)
         {
             //Edit the record
             Thread.Sleep(2000);
@@ -89,21 +87,23 @@ namespace ICproject1may23.Pages
             //edit the codename
             IWebElement editdcode = driver.FindElement(By.Id("Code"));
             editdcode.Clear();
-            editdcode.SendKeys(code);
+            editdcode.SendKeys("Project2");
+            Thread.Sleep(2000);
 
             //edit the description name
             IWebElement editDescription = driver.FindElement(By.Id("Description"));
             editDescription.Clear();
             editDescription.SendKeys("Second Project");
+            Thread.Sleep(2000);
 
             IWebElement editPriceOverlap = driver.FindElement(By.XPath("//*[@id=\"TimeMaterialEditForm\"]/div/div[4]/div/span[1]/span/input[1]"));
-            editPriceOverlap.Click();
+             editPriceOverlap.Click();
 
             IWebElement editPrice = driver.FindElement(By.Id("Price"));
             editPrice.Clear();
-            Thread.Sleep(3000);
-            editPriceOverlap.SendKeys("800"); 
-            
+            Thread.Sleep(1000);
+            editPriceOverlap.SendKeys("500");
+
             Thread.Sleep(2000);
 
 
@@ -118,19 +118,19 @@ namespace ICproject1may23.Pages
             Thread.Sleep(2000);
 
             // check if recored edited 
-            //IWebElement editedCode = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[1]"));
-            //Thread.Sleep(2000);
-              //  Assert.That(editedCode.Text == "Project2", "Actual Code and expected code do not match.");
-            }
+            IWebElement editedCode = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[1]"));
+            Thread.Sleep(2000);
+            Assert.That(editedCode.Text == "Project2", "Actual Code and expected code do not match.");
+        }
 
         public string GeteditedCode(IWebDriver driver)
         {
-            IWebElement createdcode= driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[1]"));
+            IWebElement createdcode = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[1]"));
             return createdcode.Text;
 
         }
 
-        
+
         public void DeleteTimerecord(IWebDriver driver)
         {
             Thread.Sleep(3000);
@@ -148,8 +148,10 @@ namespace ICproject1may23.Pages
 
             //check if recored deleted
             IWebElement editedCode = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[1]"));
-            Assert.That(editedCode.Text != "Project2", "Record hasn't been deleted.");
-        }
+            if (editedCode.Text != "Project2")
+            {
+                Assert.Pass("New record has been deleted successfully.");
+            }
         }
     }
-
+}

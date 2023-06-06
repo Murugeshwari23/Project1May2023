@@ -109,15 +109,17 @@ this.ScenarioInitialize(scenarioInfo);
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Edit existing time and material record with valid details")]
-        [NUnit.Framework.TestCaseAttribute("100", null)]
-        [NUnit.Framework.TestCaseAttribute("Second Project", null)]
-        [NUnit.Framework.TestCaseAttribute("Third Project", null)]
-        [NUnit.Framework.TestCaseAttribute("Fourth Project", null)]
-        public void EditExistingTimeAndMaterialRecordWithValidDetails(string code, string[] exampleTags)
+        [NUnit.Framework.TestCaseAttribute("First Project", "ammu", "100", null)]
+        [NUnit.Framework.TestCaseAttribute("Second Project", "susee", "200", null)]
+        [NUnit.Framework.TestCaseAttribute("Third Project", "shyam", "300", null)]
+        [NUnit.Framework.TestCaseAttribute("Fourth Project", "baby", "400", null)]
+        public void EditExistingTimeAndMaterialRecordWithValidDetails(string code, string description, string price, string[] exampleTags)
         {
             string[] tagsOfScenario = exampleTags;
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             argumentsOfScenario.Add("Code", code);
+            argumentsOfScenario.Add("Description", description);
+            argumentsOfScenario.Add("Price", price);
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Edit existing time and material record with valid details", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 13
 this.ScenarioInitialize(scenarioInfo);
@@ -136,10 +138,10 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.When("navigate to time and material page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 16
- testRunner.And(string.Format("edit \'{0}\' on an existing time and material record", code), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And(string.Format("edit \'{0}\', \'{1}\' and \'{2}\' on an existing time and material record", code, description, price), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 17
- testRunner.Then(string.Format("The record should be edited \'{0}\' successfully", code), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then(string.Format("The record should be edited \'{0}\', \'{1}\' and \'{2}\' successfully", code, description, price), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();

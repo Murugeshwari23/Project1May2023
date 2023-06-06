@@ -44,7 +44,7 @@ namespace ICproject1may23.Tests
         [Test, Order(2)]
         public void editTimetests()
         {
-            homePageObj.GoToTMPage(driver);
+            //homePageObj.GoToTMPage(driver);
             //tmPageObj.EditTimerecord(driver);
         }
         [Test, Order(3)]

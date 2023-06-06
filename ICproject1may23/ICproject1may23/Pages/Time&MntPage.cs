@@ -31,7 +31,7 @@ namespace ICproject1may23.Pages
             Code.SendKeys("Project1");
 
             IWebElement fieldDescription = driver.FindElement(By.Id("Description"));
-            fieldDescription.SendKeys("Project1");
+            fieldDescription.SendKeys("First Project");
 
             IWebElement priceunit = driver.FindElement(By.XPath("//*[@id=\"TimeMaterialEditForm\"]/div/div[4]/div/span[1]/span/input[1]"));
             priceunit.SendKeys("60");
@@ -68,7 +68,7 @@ namespace ICproject1may23.Pages
             return newPrice.Text;
         }
 
-        public void EditTimerecord(IWebDriver driver)
+        public void EditTimerecord(IWebDriver driver, string code, string description, string price)
         {
             //Edit the record
             Thread.Sleep(2000);
@@ -87,13 +87,13 @@ namespace ICproject1may23.Pages
             //edit the codename
             IWebElement editdcode = driver.FindElement(By.Id("Code"));
             editdcode.Clear();
-            editdcode.SendKeys("Project2");
+            editdcode.SendKeys(code);
             Thread.Sleep(2000);
 
             //edit the description name
             IWebElement editDescription = driver.FindElement(By.Id("Description"));
             editDescription.Clear();
-            editDescription.SendKeys("Second Project");
+            editDescription.SendKeys(description);
             Thread.Sleep(2000);
 
             IWebElement editPriceOverlap = driver.FindElement(By.XPath("//*[@id=\"TimeMaterialEditForm\"]/div/div[4]/div/span[1]/span/input[1]"));
@@ -102,10 +102,8 @@ namespace ICproject1may23.Pages
             IWebElement editPrice = driver.FindElement(By.Id("Price"));
             editPrice.Clear();
             Thread.Sleep(1000);
-            editPriceOverlap.SendKeys("500");
-
+            editPriceOverlap.SendKeys(price);
             Thread.Sleep(2000);
-
 
             //save the edited record
             IWebElement Savebutton = driver.FindElement(By.Id("SaveButton"));
@@ -129,7 +127,18 @@ namespace ICproject1may23.Pages
             return createdcode.Text;
 
         }
+       public string GeteditedDescription(IWebDriver driver)
+        {
+            IWebElement createddescription = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[3]"));
+            return createddescription.Text;
 
+        }
+        public string GeteditedPrice(IWebDriver driver)
+        {
+            IWebElement createdprice = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[4]"));
+            return createdprice.Text;
+
+        }
 
         public void DeleteTimerecord(IWebDriver driver)
         {

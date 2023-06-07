@@ -109,10 +109,10 @@ this.ScenarioInitialize(scenarioInfo);
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Edit existing time and material record with valid details")]
-        [NUnit.Framework.TestCaseAttribute("First Project", "ammu", "100", null)]
-        [NUnit.Framework.TestCaseAttribute("Second Project", "susee", "200", null)]
-        [NUnit.Framework.TestCaseAttribute("Third Project", "shyam", "300", null)]
-        [NUnit.Framework.TestCaseAttribute("Fourth Project", "baby", "400", null)]
+        [NUnit.Framework.TestCaseAttribute("First Project", "ammu", "$100.00", null)]
+        [NUnit.Framework.TestCaseAttribute("Second Project", "susee", "$20.00", null)]
+        [NUnit.Framework.TestCaseAttribute("Third Project", "shyam", "$30.00", null)]
+        [NUnit.Framework.TestCaseAttribute("Fourth Project", "baby", "$40.00", null)]
         public void EditExistingTimeAndMaterialRecordWithValidDetails(string code, string description, string price, string[] exampleTags)
         {
             string[] tagsOfScenario = exampleTags;

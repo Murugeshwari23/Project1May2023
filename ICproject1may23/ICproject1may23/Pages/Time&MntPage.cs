@@ -97,11 +97,9 @@ namespace ICproject1may23.Pages
             Thread.Sleep(2000);
 
             IWebElement editPriceOverlap = driver.FindElement(By.XPath("//*[@id=\"TimeMaterialEditForm\"]/div/div[4]/div/span[1]/span/input[1]"));
-             editPriceOverlap.Click();
-
+            editPriceOverlap.Click();
             IWebElement editPrice = driver.FindElement(By.Id("Price"));
             editPrice.Clear();
-            Thread.Sleep(1000);
             editPriceOverlap.SendKeys(price);
             Thread.Sleep(2000);
 
@@ -116,9 +114,9 @@ namespace ICproject1may23.Pages
             Thread.Sleep(2000);
 
             // check if recored edited 
-            IWebElement editedCode = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[1]"));
+           /*IWebElement editedCode = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[1]"));
             Thread.Sleep(2000);
-            Assert.That(editedCode.Text == "Project2", "Actual Code and expected code do not match.");
+            Assert.That(editedCode.Text == "Project2", "Actual Code and expected code do not match.");*/
         }
 
         public string GeteditedCode(IWebDriver driver)

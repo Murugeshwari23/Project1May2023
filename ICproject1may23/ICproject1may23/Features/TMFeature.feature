@@ -17,10 +17,10 @@ Scenario Outline: Edit existing time and material record with valid details
 	Then The record should be edited '<Code>', '<Description>' and '<Price>' successfully
 
 Examples:
-| Code           | Description | Price |
-| First Project  | ammu        | 100   |
-| Second Project | susee       | 200   |
-| Third Project  | shyam       | 300   |
-| Fourth Project | baby        | 400   |
+| Code           | Description | Price    |
+| First Project  | ammu        | $100.00  |
+| Second Project | susee       | $20.00   |
+| Third Project  | shyam       | $30.00   |
+| Fourth Project | baby        | $40.00   |
 
 		
